@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>软件测试笔记 | Happy planet</title><meta name="author" content="LiShuaiShuai"><meta name="copyright" content="LiShuaiShuai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、测试基础软件测试分类1.按照软件产生的阶段划分按照软件生成过程划分： 1、单元测试：针对程序源代码的测试 【开发】 2、集成测试：针对功能模块组装的测试 3、系统测试：针对整个系统（功能、非功能）进行测试 4、验收测试：以用户身份验证系统是否满足需求 【用户】 2.按照代码可见度划分根据程序的源代码可见度划分为：黑盒测试、灰盒测试、白盒测试 黑盒测试：1.源代码不可见 ​		       2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件测试笔记">
+<meta property="og:url" content="http://example.com/2024/11/08/software-test/index.html">
+<meta property="og:site_name" content="Happy planet">
+<meta property="og:description" content="一、测试基础软件测试分类1.按照软件产生的阶段划分按照软件生成过程划分： 1、单元测试：针对程序源代码的测试 【开发】 2、集成测试：针对功能模块组装的测试 3、系统测试：针对整个系统（功能、非功能）进行测试 4、验收测试：以用户身份验证系统是否满足需求 【用户】 2.按照代码可见度划分根据程序的源代码可见度划分为：黑盒测试、灰盒测试、白盒测试 黑盒测试：1.源代码不可见 ​		       2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/%E7%86%8A.webp">
+<meta property="article:published_time" content="2024-11-08T14:07:06.243Z">
+<meta property="article:modified_time" content="2024-11-08T14:38:50.994Z">
+<meta property="article:author" content="LiShuaiShuai">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/%E7%86%8A.webp"><link rel="shortcut icon" href="/image/%E5%8D%A1%E9%80%9A%E8%80%81%E8%99%8E.png"><link rel="canonical" href="http://example.com/2024/11/08/software-test/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '软件测试笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/styles/main.css"><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/9.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> Life</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fas fa-at"></i><span> Share</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> Photos</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movies</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/image/bg2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/image/logo.gif" alt="Logo"><span class="site-name">Happy planet</span></a><a class="nav-page-title" href="/"><span class="site-name">软件测试笔记</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Timeline</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> Life</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fas fa-at"></i><span> Share</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> Photos</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movies</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">软件测试笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-08T14:07:06.243Z" title="发表于 2024-11-08 22:07:06">2024-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-08T14:38:50.994Z" title="更新于 2024-11-08 22:38:50">2024-11-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="一、测试基础"><a href="#一、测试基础" class="headerlink" title="一、测试基础"></a>一、测试基础</h1><h2 id="软件测试分类"><a href="#软件测试分类" class="headerlink" title="软件测试分类"></a>软件测试分类</h2><h4 id="1-按照软件产生的阶段划分"><a href="#1-按照软件产生的阶段划分" class="headerlink" title="1.按照软件产生的阶段划分"></a>1.按照软件产生的阶段划分</h4><p>按照软件生成过程划分：</p>
+<p>1、单元测试：针对程序源代码的测试 【开发】</p>
+<p>2、集成测试：针对功能模块组装的测试</p>
+<p>3、系统测试：针对整个系统（功能、非功能）进行测试</p>
+<p>4、验收测试：以用户身份验证系统是否满足需求 【用户】</p>
+<h4 id="2-按照代码可见度划分"><a href="#2-按照代码可见度划分" class="headerlink" title="2.按照代码可见度划分"></a>2.按照代码可见度划分</h4><p>根据程序的源代码可见度划分为：黑盒测试、灰盒测试、白盒测试</p>
+<p>黑盒测试：1.源代码不可见</p>
+<p>​		       2.UI功能可见</p>
+<p>关注：数据输入和结果输出</p>
+<p>灰盒测试：1.<code>部分</code>源代码可见</p>
+<p>​                       2.UI功能可不见</p>
+<p>关注：输入输出、数据访问通道</p>
+<p>白盒测试：1.全部源代码可见</p>
+<p>​                       2.UI功能不可见</p>
+<p>关注：代码本身语法逻辑</p>
+<h4 id="3-其他测试"><a href="#3-其他测试" class="headerlink" title="3.其他测试"></a>3.其他测试</h4><p>1.冒烟测试：对核心功能的验证</p>
+<p>作用：保障提测内容具备可测性</p>
+<p>2.回归测试：对<code>已修复bug</code> \ <code>更新后</code> 对 <code>已测内容再次测试</code></p>
+<p>作用：保证bug修复，确保新功能对旧功能没有影响</p>
+<h2 id="质量模型"><a href="#质量模型" class="headerlink" title="质量模型"></a>质量模型</h2><p>软件质量模型：衡量一个软件质量的维度</p>
+<p>分为八类：</p>
+<p>1、功能性：软件是否具备某方面的能力</p>
+<p>2、性能：多用户同时使用能否满足要求 （时间、资源）</p>
+<p>3、兼容性：在不同的设置\平台上能否正常使用</p>
+<ul>
+<li>浏览器</li>
+<li>分辨率</li>
+<li>品牌</li>
+<li>其他软件</li>
+<li>网络</li>
+<li>操作系统</li>
+</ul>
+<p>4、易用性：易学、易用、用户粘性好</p>
+<ul>
+<li>流畅</li>
+<li>美观</li>
+<li>简洁</li>
+</ul>
+<p>5、可靠性：长时间运行稳定、不出现异常</p>
+<ul>
+<li>无响应</li>
+<li>卡顿</li>
+<li>死机</li>
+</ul>
+<p>6、安全：敏感数据存储\传输安全</p>
+<p>7、可维护性：运行过程出现问题维护操作是否方便</p>
+<p>8、可移植性：应用系统升级\数据迁移方便</p>
+<h1 id="二、单功能测试"><a href="#二、单功能测试" class="headerlink" title="二、单功能测试"></a>二、单功能测试</h1><p>单功能：软件程序或应用程序只提供一项核心功能或特效、而不包含其他附加功能</p>
+<h2 id="1、等价类划分法：一种用少量数据获得较好测试效果的工具"><a href="#1、等价类划分法：一种用少量数据获得较好测试效果的工具" class="headerlink" title="1、等价类划分法：一种用少量数据获得较好测试效果的工具"></a>1、等价类划分法：一种用少量数据获得较好测试效果的工具</h2><p>场景：表单类页面元素测试使用（输入框、下拉框、单选框、复选框）等</p>
+<p>步骤：</p>
+<p>1、划分有效等价类：满足需求的数据集合</p>
+<p>2、划分无效等价类：不满足需求的数据集合</p>
+<p>3、每类中选取代表数据</p>
+<h2 id="边界值分析法"><a href="#边界值分析法" class="headerlink" title="边界值分析法"></a>边界值分析法</h2><p><code>一个边界范围</code>限制选取测试数据工具</p>
+<p><img src="/image/1730958398463.png" alt="73095839846"></p>
+<ul>
+<li><p>选取</p>
+<p>1、上点：刚好是边界上的点、必选（不考虑是否包含上点）											100、300</p>
+<p>2、离点：距离上点最近的点，选择2个（<code>不包含</code>上点选择范围内的点，<code>包含</code>上点选择范围外的点）	 99、301</p>
+<p>3、内点：边界范围内的任意点，必选（建议选择中间范围）											 200	</p>
+</li>
+<li><p>步骤</p>
+<p>1、边界值分析（负责测试<code>长度范围</code>）</p>
+<p>2、划分等价类（负责测试<code>类型</code>和<code>规则</code>）</p>
+<p>3、提取数据</p>
+<p>​</p>
+<h2 id="非功能测试设计"><a href="#非功能测试设计" class="headerlink" title="非功能测试设计"></a>非功能测试设计</h2><p>定义：除了软件功能测试，其他都是非功能测试</p>
+<p>主要范围：</p>
+<p>1、兼容性</p>
+<p>2、易用性</p>
+<p>3、安全性</p>
+<p>4、性能</p>
+<p>非功能重点测试项：</p>
+<p>兼容性：web项目测试浏览器兼容 谷歌、火狐、苹果、Edge</p>
+<p>易用性：主观感受为主，简洁易用</p>
+<p>安全和性能测试属于专项测试</p>
+</li>
+</ul>
+<h1 id="二、测试用例"><a href="#二、测试用例" class="headerlink" title="二、测试用例"></a>二、测试用例</h1><h4 id="测试用例介绍"><a href="#测试用例介绍" class="headerlink" title="测试用例介绍"></a>测试用例介绍</h4><ul>
+<li>测试用例：描述测试点执行的文档（测试输入、执行条件、预期结果等）</li>
+</ul>
+<p><img src="/image/1730964478911.png" alt="73096447891"></p>
+<ul>
+<li><p>作用：</p>
+<p>1、测试点能被精准的执行</p>
+<p>2、便于团队协作</p>
+</li>
+<li><p>测试用例核心内容（八大要素）</p>
+<p>用例编号、用例标题、所属模块优先级、前置条件、测试步骤、测试数据、预期结果</p>
+<p>① 用例编号：项目_ 模块_ 数字    				Hmtt_login_001</p>
+<p>② 用例标题：预期执行结果（测试点）			登录失败（密码为空）</p>
+<p>③ 所属模块：模块名							登录</p>
+<p>④ 优先级：用例的重要程度（高P0 ~ P3低）	P1</p>
+<p>⑤ 前置条件：执行操作步骤的前置条件			</p>
+<ul>
+<li>账户已注册</li>
+<li>已打开登录页面</li>
+</ul>
+<p>⑥ 测试步骤：测试点执行的关键步骤</p>
+<ul>
+<li>输入账户</li>
+<li>输入密码</li>
+<li>点击登录按钮</li>
+</ul>
+<p>⑦ 测试数据：输入数据</p>
+<ul>
+<li>账户：已注册手机号</li>
+<li>密码：空</li>
+<li>点击登录按钮</li>
+</ul>
+<p>⑧ 预期结果：预期执行结果及隐形结果</p>
+<ul>
+<li>登录失败，提示：密码不可为空，请正确输入注册账号密码</li>
+</ul>
+</li>
+</ul>
+<h1 id="三、判定表"><a href="#三、判定表" class="headerlink" title="三、判定表"></a>三、判定表</h1><p>定义：一种以表格形式表达多条件逻辑判断的工具</p>
+<p><img src="/image/1730967135572.png" alt="73096713557"></p>
+<p>作用：多条件之间有约束规则的需求设计测试点</p>
+<p>组成：</p>
+<ul>
+<li><p>条件桩：列出问题中的所有条件（次序无所谓）</p>
+</li>
+<li><p>动作桩：列出问题中可能采取的操作（可以有多个）</p>
+</li>
+<li><p>条件项：列出条件对应的取值，所有可能情况下的真假值</p>
+</li>
+<li><p>动作项：推导出条件项（各种取值情况）</p>
+<p><code>例如</code></p>
+<p>需求：某促销活动优惠，在指定时间段内消费并且消费金额满1000元，享受九折优惠</p>
+<ul>
+<li>条件桩：指定时间段，满1000</li>
+<li>动作桩：9折，无折扣</li>
+<li>条件项：是，否</li>
+<li>动作项：打九折，无折扣</li>
+</ul>
+</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>判定表中贯穿条件项和动作项的一列就是一条规则</li>
+<li>假设有n个条件，每个条件的取值有两个（0,1），全组合有2的n次方种规则</li>
+</ul>
+<h1 id="四、执行用例"><a href="#四、执行用例" class="headerlink" title="四、执行用例"></a>四、执行用例</h1><h2 id="用例执行"><a href="#用例执行" class="headerlink" title="用例执行"></a>用例执行</h2><p>定义：执行用例，也就是对项目开始测试。</p>
+<ul>
+<li>前置<ul>
+<li>项目提测内容开发已交付测试</li>
+<li>测试项目环境已准备好</li>
+</ul>
+</li>
+<li>关注<ul>
+<li>实际执行结果与预期执行结果一致，一致通过，不一致为缺陷（bug）</li>
+<li>项目执行隐形结果与用例预期隐形结果相似</li>
+<li>实际结果与预期结果有 争议处，参考用户角度衡量</li>
+</ul>
+</li>
+</ul>
+<h1 id="五、缺陷管理"><a href="#五、缺陷管理" class="headerlink" title="五、缺陷管理"></a>五、缺陷管理</h1><h2 id="缺陷介绍"><a href="#缺陷介绍" class="headerlink" title="缺陷介绍"></a>缺陷介绍</h2><p>定义：软件中存在的任何<code>问题</code>，也叫缺陷（bug）</p>
+<p>缺陷衡量标准：</p>
+<ul>
+<li>软件未实现需求（规格）说明书中明确要求的功能  					<code> --&gt; 少功能</code></li>
+<li>软件实现的功能超出需求（规格）说明书指明的范围                                    <code>--&gt;多功能</code></li>
+<li>软件出现了需求（规格）说明书中指明不应该出现的错误                           <code> --&gt;功能错误</code></li>
+<li>软件实现需求（规格）说明书中虽未明确指明但应该实现的要求 –&gt; 隐性功能确实\错误</li>
+<li>软件难以理解，不易使用，运行缓慢，用户体验不好                                     <code>--&gt;不易使用</code></li>
+</ul>
+<h3 id="缺陷描述及提交"><a href="#缺陷描述及提交" class="headerlink" title="缺陷描述及提交"></a>缺陷描述及提交</h3><p>目的：将缺陷提交给开发，开发根据描述可复现缺陷</p>
+<p>工具：禅道，jira…</p>
+<p><img src="/image/1730970879461.png" alt="73097087946"></p>
+<p><code>重点</code></p>
+<ul>
+<li>当前指派：将bug提交给谁</li>
+<li>Bug类型：代码错误，设计缺陷…</li>
+<li>Bug标题：描述bug问题<ul>
+<li><code>测试点描述及预期结果（实际效果</code></li>
+</ul>
+</li>
+<li>严重程度：bug严重程度</li>
+<li>优先级：bug修复紧急程度</li>
+<li>重现步骤：复现步骤</li>
+<li>附件：执行实际结果截图或者日志</li>
+</ul>
+<h3 id="缺陷跟踪流程"><a href="#缺陷跟踪流程" class="headerlink" title="缺陷跟踪流程"></a>缺陷跟踪流程</h3><p><img src="/image/1730971439793.png" alt="73097143979"></p>
+<h1 id="六、业务测试"><a href="#六、业务测试" class="headerlink" title="六、业务测试"></a>六、业务测试</h1><h4 id="业务测试"><a href="#业务测试" class="headerlink" title="业务测试"></a>业务测试</h4><p>业务：是指软件为满足用户特定的业务需求而设计并实现的一系列功能。</p>
+<p>​		下单业务（登录 -&gt; 搜索 -&gt; 添加购物车 -&gt; 下单 -&gt; 支付）</p>
+<p>作用：测试软件系统单功能之间关联性数据处理逻辑是否正确</p>
+<p>​		例：添加购物车时对登录状态的判断</p>
+<p>方法：流程图法</p>
+<p>​		流程图：使用一些特定图形和带箭头的线表达程序业务走向</p>
+<p>​		菱形代表判断</p>
+<p>​		椭圆代表开始和结束</p>
+<p>​		长方形代表操作</p>
+<p><img src="/image/1730971949130.png" alt="73097194913"></p>
+<p>步骤：</p>
+<p>​	1、确认业务流程图</p>
+<p>​	2、流程图中开始到结束每条路径都是一条用例</p>
+<h2 id="项目测试流程"><a href="#项目测试流程" class="headerlink" title="项目测试流程"></a>项目测试流程</h2><p><img src="/image/1730974138909.png" alt="73097413890"></p>
+<h2 id="个人实施测试流程"><a href="#个人实施测试流程" class="headerlink" title="个人实施测试流程"></a>个人实施测试流程</h2><p><img src="/image/1730974227264.png" alt="73097422726"></p>
+<h2 id="单模块测试"><a href="#单模块测试" class="headerlink" title="单模块测试"></a>单模块测试</h2><p>单功能测试步骤：</p>
+<p>① 熟悉需求</p>
+<p>1、需求从哪来？</p>
+<ul>
+<li>需求文档</li>
+<li>产品原型图</li>
+<li>已存在的软件界面（不一定有）</li>
+</ul>
+<p>2、怎么属性需求？</p>
+<ul>
+<li>阅读并理解文档描述</li>
+<li>操作或梳理业务规则及流程</li>
+</ul>
+<p>② 提取测试点覆盖需求</p>
+<p>③ 测试点转执行测试用例</p>
+<p>④ 缺陷管理</p>
+<h1 id="APP测试"><a href="#APP测试" class="headerlink" title="APP测试"></a>APP测试</h1><h2 id="App测试范围"><a href="#App测试范围" class="headerlink" title="App测试范围"></a>App测试范围</h2><h3 id="功能测试："><a href="#功能测试：" class="headerlink" title="功能测试："></a>功能测试：</h3><ul>
+<li>业务测试</li>
+<li>功能模块测试</li>
+</ul>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><ul>
+<li>CPU，内存占用</li>
+<li>启动速度</li>
+<li>流量，电量消耗</li>
+<li>流畅度</li>
+<li>稳定性</li>
+</ul>
+<h3 id="专项测试"><a href="#专项测试" class="headerlink" title="专项测试"></a>专项测试</h3><ul>
+<li>安装 卸载升级</li>
+<li>push消息推送</li>
+<li>交叉事件测试</li>
+<li>用户体验测试</li>
+<li>兼容性测</li>
+</ul>
+<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p>定义：使用技术手段，验证程序功能符合应用需求</p>
+<h3 id="测试对象："><a href="#测试对象：" class="headerlink" title="测试对象："></a>测试对象：</h3><ul>
+<li>核心业务</li>
+<li>单功能</li>
+</ul>
+<h3 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h3><ul>
+<li>需求分析</li>
+<li>测试计划</li>
+<li>测试用例设计</li>
+<li>测试用例执行</li>
+<li>缺陷管理</li>
+<li>测试报告</li>
+</ul>
+<h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ul>
+<li>等价类：穷举数据选取</li>
+<li>边界值：长度范围覆盖</li>
+<li>判定表：多条件之间约束限制</li>
+<li>流程图：业务流程</li>
+</ul>
+<h2 id="App专项测试"><a href="#App专项测试" class="headerlink" title="App专项测试"></a>App专项测试</h2><p>定义：在不同的移动设备上能持久，稳定的运行APP程序</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">LiShuaiShuai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/11/08/software-test/">http://example.com/2024/11/08/software-test/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Happy planet</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B5%8B%E8%AF%95/">测试</a><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div><div class="post-share"><div class="social-share" data-image="/image/%E7%86%8A.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/wechat.png" target="_blank"><img class="post-qr-code-img" src="/image/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/image/alipay.png" target="_blank"><img class="post-qr-code-img" src="/image/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2024/11/07/hello-world/" title="Hello World"><img class="cover" src="/image/%E6%88%BF%E5%AD%90.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Quick StartCreate a new post$ hexo new &quot;My New Post&quot;  More info: Writing Run server$ hexo server  More info: Server Generate static files$ hexo generate  More info: Generating Deploy to remote sites$ hexo deploy  More info: Deployment </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/9.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">LiShuaiShuai</div><div class="author-info-description">生活，有剥夺，也有馈赠</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lishuaishuai3" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/bigshuai98@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">一、测试基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">软件测试分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8C%89%E7%85%A7%E8%BD%AF%E4%BB%B6%E4%BA%A7%E7%94%9F%E7%9A%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1.按照软件产生的阶段划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%8C%89%E7%85%A7%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%A7%81%E5%BA%A6%E5%88%92%E5%88%86"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">2.按照代码可见度划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">3.其他测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A8%E9%87%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">质量模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8D%95%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">二、单功能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95%EF%BC%9A%E4%B8%80%E7%A7%8D%E7%94%A8%E5%B0%91%E9%87%8F%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%BE%97%E8%BE%83%E5%A5%BD%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text">1、等价类划分法：一种用少量数据获得较好测试效果的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">边界值分析法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.3.</span> <span class="toc-text">非功能测试设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">二、测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">测试用例介绍</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%A4%E5%AE%9A%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">三、判定表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%89%A7%E8%A1%8C%E7%94%A8%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text">四、执行用例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BE%8B%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">用例执行</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%BC%BA%E9%99%B7%E7%AE%A1%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">五、缺陷管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.1.</span> <span class="toc-text">缺陷介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E6%8F%8F%E8%BF%B0%E5%8F%8A%E6%8F%90%E4%BA%A4"><span class="toc-number">6.1.1.</span> <span class="toc-text">缺陷描述及提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E8%B7%9F%E8%B8%AA%E6%B5%81%E7%A8%8B"><span class="toc-number">6.1.2.</span> <span class="toc-text">缺陷跟踪流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%9A%E5%8A%A1%E6%B5%8B%E8%AF%95"><span class="toc-number">7.</span> <span class="toc-text">六、业务测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%B5%8B%E8%AF%95"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">业务测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="toc-number">7.1.</span> <span class="toc-text">项目测试流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E5%AE%9E%E6%96%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="toc-number">7.2.</span> <span class="toc-text">个人实施测试流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95"><span class="toc-number">7.3.</span> <span class="toc-text">单模块测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#APP%E6%B5%8B%E8%AF%95"><span class="toc-number">8.</span> <span class="toc-text">APP测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#App%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="toc-number">8.1.</span> <span class="toc-text">App测试范围</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="toc-number">8.1.1.</span> <span class="toc-text">功能测试：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">8.1.2.</span> <span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E9%A1%B9%E6%B5%8B%E8%AF%95"><span class="toc-number">8.1.3.</span> <span class="toc-text">专项测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">8.2.</span> <span class="toc-text">功能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="toc-number">8.2.1.</span> <span class="toc-text">测试对象：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">8.2.2.</span> <span class="toc-text">流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">8.2.3.</span> <span class="toc-text">方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#App%E4%B8%93%E9%A1%B9%E6%B5%8B%E8%AF%95"><span class="toc-number">8.3.</span> <span class="toc-text">App专项测试</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/software-test/" title="软件测试笔记"><img src="/image/%E7%86%8A.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="软件测试笔记"/></a><div class="content"><a class="title" href="/2024/11/08/software-test/" title="软件测试笔记">软件测试笔记</a><time datetime="2024-11-08T14:07:06.243Z" title="发表于 2024-11-08 22:07:06">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/07/hello-world/" title="Hello World"><img src="/image/%E6%88%BF%E5%AD%90.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2024/11/07/hello-world/" title="Hello World">Hello World</a><time datetime="2024-11-06T16:23:29.783Z" title="发表于 2024-11-07 00:23:29">2024-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By LiShuaiShuai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="/styles/fish.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
